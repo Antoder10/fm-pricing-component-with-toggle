@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react';
 
-function App() {
+import data from './data.json';
+
+import PlansList from './components/PlansList';
+import Toggle from './components/Toggle';
+
+const App = () => {
+  const [plans, setPlans] = useState([]);
+  const [showMonthly, setShowMonthly] = useState(true);
+
+
+  useEffect(() => {
+    setPlans(data);
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex flex-col sm:h-screen bg-blue-100" >
+      <Toggle showMonthly={showMonthly} setShowMonthly={setShowMonthly}/>
+      <PlansList plans={plans} showMonthly={showMonthly}/>
     </div>
   );
 }
